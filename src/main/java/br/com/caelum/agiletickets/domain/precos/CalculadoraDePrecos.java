@@ -18,7 +18,7 @@ public class CalculadoraDePrecos {
 		case CINEMA:
 		case SHOW:
 			if(razaoIngressosRestantes <= 0.05) { 
-				preco = sessao.getPreco().add(sessao.getPreco().multiply(BigDecimal.valueOf(0.10)));
+				preco = sessao.getPreco().add(precoPeloValorDaRazao(sessao, 0.10));
 			} else {
 				preco = sessao.getPreco();
 			}
@@ -27,13 +27,13 @@ public class CalculadoraDePrecos {
 		case BALLET:
 		case ORQUESTRA:
 			if(razaoIngressosRestantes <= 0.50) { 
-				preco = sessao.getPreco().add(sessao.getPreco().multiply(BigDecimal.valueOf(0.20)));
+				preco = sessao.getPreco().add(precoPeloValorDaRazao(sessao, 0.20));
 			} else {
 				preco = sessao.getPreco();
 			}
 			
 			if(sessao.getDuracaoEmMinutos() > 60){
-				preco = preco.add(sessao.getPreco().multiply(BigDecimal.valueOf(0.10)));
+				preco = preco.add(precoPeloValorDaRazao(sessao, 0.10));
 			}
 			
 			break;
@@ -46,5 +46,11 @@ public class CalculadoraDePrecos {
 		
 		return preco.multiply(BigDecimal.valueOf(quantidade));
 	}
+
+	private static BigDecimal precoPeloValorDaRazao(Sessao sessao, double valorDaRazao) {
+		return sessao.getPreco().multiply(BigDecimal.valueOf(valorDaRazao));
+	}
+	
+	
 
 }
