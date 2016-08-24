@@ -1,8 +1,11 @@
 package br.com.caelum.agiletickets.models;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.junit.Test;
 
 public class EspetaculoTest {
@@ -81,4 +84,22 @@ public class EspetaculoTest {
 		return sessao;
 	}
 	
+	@Test
+	public void deveCriarSessao() {
+		Espetaculo suelen = new Espetaculo();
+		int expected = suelen.getSessoes().size() + 1;
+		suelen.criaSessoes(LocalDate.now(), LocalDate.now(), LocalTime.now(), Periodicidade.DIARIA);		
+		assertEquals(expected, suelen.getSessoes().size());
+		
+	}
+	
+	@Test
+	public void deveCriarSessaoPorDia() {
+		Espetaculo suelen = new Espetaculo();
+		int totalSessoes = 9;
+		int expected = suelen.getSessoes().size() + 1 + totalSessoes;
+		suelen.criaSessoes(LocalDate.now(), LocalDate.now().plusDays(totalSessoes), LocalTime.now(), Periodicidade.DIARIA);		
+		assertEquals(expected, suelen.getSessoes().size());
+		
+	}
 }
