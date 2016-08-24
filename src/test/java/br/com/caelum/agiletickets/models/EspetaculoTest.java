@@ -102,4 +102,14 @@ public class EspetaculoTest {
 		assertEquals(expected, suelen.getSessoes().size());
 		
 	}
+	
+	@Test
+	public void deveCriarSessaoPorSemana() {
+		Espetaculo suelen = new Espetaculo();
+		int totalSessoes = 3;
+		int expected = suelen.getSessoes().size() + 1;
+		suelen.criaSessoes(LocalDate.now(), LocalDate.now().plusDays(totalSessoes), LocalTime.now(), Periodicidade.SEMANAL);		
+		assertEquals(expected, suelen.getSessoes().size());
+		
+	}
 }
